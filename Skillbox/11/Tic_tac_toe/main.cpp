@@ -47,15 +47,15 @@ bool valid_field(string str){
 
 string whoWon(string str){
     
-    bool X[4]{0, 0, 0, 0};
-    int horizontX[3]{0, 0, 0};
-    int verticalX[3]{0, 0, 0};
-    int diagonalX[2]{0, 0};
+    bool X[4] = {0, 0, 0, 0};
+    int horizontX[3] = {0, 0, 0};
+    int verticalX[3] = {0, 0, 0};
+    int diagonalX[2] = {0, 0};
 
-    bool O[4]{0, 0, 0, 0};
-    int horizontO[3]{0, 0, 0};
-    int verticalO[3]{0, 0, 0};
-    int diagonalO[2]{0, 0};
+    bool O[4] = {0, 0, 0, 0};
+    int horizontO[3] = {0, 0, 0};
+    int verticalO[3] = {0, 0, 0};
+    int diagonalO[2] = {0, 0};
 
     if (valid_field(str)){
         for (int x = 0; x < 3; x++){
