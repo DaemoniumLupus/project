@@ -13,6 +13,7 @@ string encrypt_caesar(string original, int x){
             }else temporary -= 'A';
 
             temporary += x;
+
             temporary %= 26;
 
             if (original[i] >= 'a' && original[i] <= 'z'){
@@ -53,6 +54,6 @@ int main(){
     cout << "Enter bias: ";
     cin >> bias;
     cout << encrypt_caesar(text, bias);
-    cout << endl << decrypt_caesar(encrypt_caesar(text, bias), bias += 16);
+    cout << endl << decrypt_caesar(encrypt_caesar(text, bias), bias = bias + (26 - bias));
 
 }
