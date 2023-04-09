@@ -20,20 +20,27 @@ bool dot(string email){
 void separation(string email1){
     bool match = true;
     for (int i = 0; i < email1.length(); i++){
-        if(email1[i] == '@'){ 
+        if (email1[i] == '@' && match == true) {
             match = false;
             match3 = true;
+            continue;
         }
         if (match){
             firstEmail += email1[i];
-        }else if (email1[i] != '@'){
+        }else{
             secondEmail += email1[i];
+        }
+        if(email1[i] == '@' && match == false){
+            match3 = false;
+            break;
         }
     }
 }
 
 bool firstMatch(string firstEmail){
-
+    if (match3 == false){
+        return false;
+    }
     string /*char*/condition = "!#$%&'*+.-/=?^_`{|}~1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";/* {'!','#','$','%','&', 39,'*','+','-','.','/','=','?','^','_','`','{','|','}','~'};*/
     bool match1 = true;
     int match_1[firstEmail.length()];
