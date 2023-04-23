@@ -47,19 +47,110 @@ bool place_ship(bool field[][10], int size) {
       cerr << "Invalid ship size:" << size << endl;
       return false;
     }
-    if (d_y != 0){
+    if (d_y != 0) {
       cerr << "Diagonal ship not supported!" << endl;
       return false;
     }
 
     int y = y_s;
-    for (int i = x_s; i < count; i++)
-    {
-
-
+    for (int x = x_s; x <= x_e; x++) {
+      if (field[x][y]) {
+        cerr << "collision detected!" << endl;
+        return false;
+      }
     }
-    
+    for (int x = x_s; x <= x_e; x++) {
+      field[x][y] = true;
+    }
+  } else {
+
+    if (d_y + 1 != size) {
+      cerr << "Invalid ship size:" << size << endl;
+      return false;
+    }
+    if (d_x != 0) {
+      cerr << "Diagonal ship not supported!" << endl;
+      return false;
+    }
+    int x = x_s;
+    for (int y = y_s; y <= y_e; y++) {
+      if (field[x][y]) {
+        cerr << "collision detected!" << endl;
+        return false;
+      }
+    }
+    for (int y = y_s; y <= y_e; y++) {
+      field[x][y] = true;
+    }
   }
 }
 
-int main() { bool plant[10][10]; }
+void place_ships(bool field[][10]) {
+  for (int i = 0; i < 4; i++) {
+    cout << "TINY []" << endl;
+    while (!place_ship(field, 1)) {
+      cout << "Please, try again" << endl;
+    }
+  }
+
+  for (int i = 0; i < 3; i++) {
+    cout << "SMALL [][]" << endl;
+    while (!place_ship(field, 2)) {
+      cout << "Please, try again" << endl;
+    }
+  }
+
+  for (int i = 0; i < 2; i++) {
+    cout << "MEDIUM [][][]" << endl;
+    while (!place_ship(field, 3)) {
+      cout << "Please, try again" << endl;
+    }
+  }
+
+  cout << "BIG [][][][]" << endl;
+  while (!place_ship(field, 4)) {
+    cout << "Please, try again" << endl;
+  }
+}
+bool attack(bool field[][10]) {
+  int x, y;
+  cout << "X Y:" << endl;
+  cin >> x >> y;
+  if (x >= 0 && x < 10 && y >= 0 && y < 10 && field[x][y]) {
+    cout << "Damage!" << endl;
+    field[x][y] = false;
+    return true;
+  } else {
+    cout << "MISS!" << endl;
+    return false;
+  }
+}
+
+int main() {
+  cout << "Player 1, place ships!" << endl;
+  place_ships(field_1);
+  cout << "Player 2, place ships!" << endl;
+  place_ships(field_2);
+
+  int player_1_block_left = 4 * 1 + 3 * 2 + 2 * 3 + 1 * 4;
+  int player_2_block_left = 4 * 1 + 3 * 2 + 2 * 3 + 1 * 4;
+
+  while(true){
+    cout << "Player 1, attack!" << endl;
+    if (attack(field_2)){
+      player_2_block_left -= 1;
+    }
+    if(player_2_block_left == 0){
+      cout << "Player 1 Wins!" << endl;
+      return 0;
+    }
+    cout << "Player 2, attack!" << endl;
+    if (attack(field_1)) {
+      player_1_block_left -= 1;
+    }
+    if (player_1_block_left == 0) {
+      cout << "Player 2 Wins!" << endl;
+      return 0;
+    }
+  }
+}
