@@ -2,25 +2,13 @@
 #include <vector>
 
 int ascending_order(std::vector<int> vec) {
-  int max = 0;
-  int max_ind = 0;
-  /*  for (int i = 1; i < vec.size(); i++) {
-     for (int j = 1; j < vec.size(); j++)
-     { */
+
   for (int i = 1; i < vec.size(); i++) {
-    for (int j = i; j > 0 && vec[j - 1] > vec[j];
-         j--) { // пока j>0 и элемент j-1 > j, x-массив int
+    for (int j = i; j > 0 && vec[j - 1] > vec[j]; j--) {
       int temp;
       temp = vec[j - 1];
       vec[j - 1] = vec[j];
       vec[j] = temp;
-
-      /* if (vec[i] > vec[i - 1]) {
-        int temp;
-        temp = vec[i - 1];
-        vec[i - 1] = vec[i];
-        vec[i] = temp;
-      } */
     }
   }
   std::cout << std::endl;
@@ -41,21 +29,21 @@ int main() {
   while (n != -2) {
     n = 0;
     vec.clear();
-    while (n != -1) {
-      std::cin >> n;
+    while (std::cin >> n && n != -1) {
+      // std::cin >> n;
       if (n == -2) {
         break;
       }
       vec.push_back(n);
-      
     }
-    
-    vec.pop_back();
-    if (vec.size() >= 5 ) {
-      
-      std::cout << ascending_order(vec);
-      
-    }else{
+
+    // vec.pop_back();
+
+    if (vec.size() >= 5 && n == -1) {
+
+      std::cout << ascending_order(vec) << std::endl;
+
+    } else if (n != -2) {
       std::cerr << "insufficient array size" << std::endl;
     }
   }

@@ -35,7 +35,18 @@ void kadane(vector<int> arr, int n) {
 }
 
 int main() {
-  vector<int> arr =   {-2, 1, -3, 4, -1, 2, 1, -5, 4} ;
+  vector<int> arr /* =   {-2, 1, -3, 4, -1, 2, 1, -5, 4} */ ;
+
+  
+  int q;
+  while (1) {
+    std::cin >> q;
+    arr.push_back(q);
+    if (std::cin.get() == '\n') {
+      break;
+    }
+  }
+
   int n = arr.size();
 
   kadane(arr, n);
