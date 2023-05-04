@@ -4,7 +4,6 @@
 
 int switches_state = 0;
 
-
 enum switches {
   LIGHTS_INSIDE = 1,
   LIGHTS_OUTSIDE = 2,
@@ -35,7 +34,6 @@ int Control(std::string buffer,std::string time/* int t_outside, int t_inside, b
              std::string time, int count */) {
 
   int count;
-  int count_2;
   int time_num;
   int t_outside = 0;
   int t_inside = 0;
@@ -59,14 +57,27 @@ int Control(std::string buffer,std::string time/* int t_outside, int t_inside, b
   }
 
   if (t_outside < 0) {
-    switches_state |= WATER_PIPE_HEATING;
-  } else if (t_outside > 5 && count & WATER_PIPE_HEATING) {
-    switches_state &= ~WATER_PIPE_HEATING;
-  }else{
-
+    count |= WATER_PIPE_HEATING;
+  } else if (t_outside > 5) {
+    count &= ~WATER_PIPE_HEATING;
+  }
+  if ((time_num > 16 || time_num < 5) && movement_outside) {
+    count |= LIGHTS_OUTSIDE;
+  } else {
+    count &= ~LIGHTS_OUTSIDE;
+  }
+  if (t_inside < 22) {
+    count |= HEATERS;
+  } else if (t_inside >= 25) {
+    count &= ~HEATERS;
+  }
+  if (t_inside >= 30) {
+    count |= CONDITIONER;
+  } else if (t_inside <= 25) {
+    count &= ~CONDITIONER;
   }
 
-  return count_2;
+  return count;
 }
 int main() {
   /* int count;
@@ -98,7 +109,7 @@ int main() {
         lighth_inside = 0;
       } */
 
-      count = Control(buffer,time/* t_inside, t_outside, movement_outside, lighth_inside, time,
+      switches_state = Control(buffer,time/* t_inside, t_outside, movement_outside, lighth_inside, time,
               count */);
     }
   } while (buffer != "-1");
