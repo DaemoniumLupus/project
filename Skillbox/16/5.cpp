@@ -30,15 +30,15 @@ std::string Time(std::string time) {
   return time;
 }
 
-int Control(std::string buffer,std::string time/* int t_outside, int t_inside, bool movement, bool lighth,
-             std::string time, int count */) {
+int Control(std::string buffer,std::string time) {
 
-  int count;
+  int count = 0;
   int time_num;
   int t_outside = 0;
   int t_inside = 0;
   bool lighth_inside;
   bool movement_outside;
+  int t_lighth = 5000;
   std::string lighth;
   std::string movement;
 
@@ -76,41 +76,61 @@ int Control(std::string buffer,std::string time/* int t_outside, int t_inside, b
   } else if (t_inside <= 25) {
     count &= ~CONDITIONER;
   }
+  if (lighth_inside) {
+    count |= LIGHTS_INSIDE;
+    if (time_num > 16 && time_num <= 20) {
+      t_lighth -= 575;
+    } else if (time_num == 0) {
+      t_lighth = 5000;
+    }
+  } else {
+    count &= ~LIGHTS_INSIDE;
+  }
+
+  if (count & LIGHTS_INSIDE && switches_state & ~LIGHTS_INSIDE) {
+    std::cout << "The light in the house is on.\nLight temperature: "
+              << t_lighth << std::endl;
+  } else if (count & ~LIGHTS_INSIDE && switches_state & LIGHTS_INSIDE) {
+    std::cout << "The lights in the house are off.\n";
+  }
+  if (count & LIGHTS_OUTSIDE && switches_state & ~LIGHTS_OUTSIDE) {
+    std::cout << "The street light is on";
+  } else if (count & ~LIGHTS_OUTSIDE && switches_state & LIGHTS_OUTSIDE) {
+    std::cout << "The street light is off.\n";
+  }
+  if (count & HEATERS && switches_state & ~HEATERS) {
+    std::cout << "Heating on.\n";
+  }else if (count & ~HEATERS && switches_state & HEATERS){
+    std::cout << "Heating off.\n";
+  }else if (count & CONDITIONER && switches_state & ~CONDITIONER){
+    std::cout << "Air conditioning on.\n";
+  }else if (count & ~CONDITIONER && switches_state & CONDITIONER){
+    std::cout << "Air conditioning off.\n";
+  }
+  if (count & WATER_PIPE_HEATING && switches_state & ~WATER_PIPE_HEATING) {
+    std::cout << "Plumbing heating on.\n";
+  } else if (count & ~WATER_PIPE_HEATING && switches_state & WATER_PIPE_HEATING) {
+    std::cout << "Plumbing heating off.\n";
+  }
+
 
   return count;
 }
 int main() {
-  /* int count;
-  int switches_state = 0;
-  int t_outside = 0;
-  int t_inside = 0;
-  bool lighth_inside;
-  bool movement_outside;
-  std::string lighth;
-  std::string movement; */
+  
   std::string time = "00:00";
   std::string buffer;
 
   do {
     time = Time(time);
     std::cout << time << std::endl;
-    std::cin >> buffer;
+    buffer.clear();
+    std::getline(std::cin, buffer);
+    
     if (buffer != "-1") {
-      /* std::stringstream temp_sream(buffer);
-      temp_sream >> t_inside >> t_outside >> movement >> lighth;
-      if (movement == "yes") {
-        movement_outside = 1;
-      } else {
-        movement_outside = 0;
-      }
-      if (lighth == "on") {
-        lighth_inside = 1;
-      } else {
-        lighth_inside = 0;
-      } */
+      
 
-      switches_state = Control(buffer,time/* t_inside, t_outside, movement_outside, lighth_inside, time,
-              count */);
+      switches_state = Control(buffer,time);
     }
   } while (buffer != "-1");
 }
