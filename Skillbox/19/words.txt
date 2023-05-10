@@ -1,0 +1,6 @@
+bank word little max min
+mark dark word little
+dark max word bank
+mark moon money milk
+more mark word dark
+douter 
