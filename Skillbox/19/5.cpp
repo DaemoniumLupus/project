@@ -7,8 +7,8 @@ bool question(int sector, bool &free) {
   std::string answer;
   std::string true_answer;
   std::string x;
-  std::string quest_file = "\\question\\";
-  std::string answer_file = "\\question\\";
+  std::string quest_file = "question\\";
+  std::string answer_file = "question\\";
   x = std::to_string(sector);
   quest_file += x;
   answer_file += x;
@@ -17,7 +17,9 @@ bool question(int sector, bool &free) {
 
   file.open(quest_file);
   
-  file.is_open();
+  if(file.is_open()){
+    std::cout << "!!!";
+  }
 
   int count = 0;
   char buffer[21];
@@ -32,12 +34,14 @@ bool question(int sector, bool &free) {
 
   file.close();
 
-  std::cout << std::endl << "Enter answer: ";
+  std::cout << "Enter answer: ";
   std::cin >> answer;
 
   file.open(answer_file);
 
   file >> true_answer;
+  
+  free = false;
 
   if (answer == true_answer) {
     return true;
@@ -68,7 +72,7 @@ int main() {
       }
     }
 
-    std::cout << "Sector " << volchok + 1 << " selected";
+    std::cout << "Sector " << volchok + 1 << " selected" << std::endl;
 
     if (question(volchok, sector[volchok])) {
       player_count++;
