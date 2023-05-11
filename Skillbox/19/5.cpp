@@ -10,16 +10,17 @@ bool question(int sector, bool &free) {
   std::string quest_file = "question\\";
   std::string answer_file = "question\\";
   x = std::to_string(sector);
+
   quest_file += x;
   answer_file += x;
   quest_file += ".txt";
   answer_file += "ans.txt";
 
   file.open(quest_file);
-  
-  if(file.is_open()){
+
+ /*  if (file.is_open()) {
     std::cout << "!!!";
-  }
+  } */
 
   int count = 0;
   char buffer[21];
@@ -40,7 +41,7 @@ bool question(int sector, bool &free) {
   file.open(answer_file);
 
   file >> true_answer;
-  
+
   free = false;
 
   if (answer == true_answer) {
@@ -67,30 +68,32 @@ int main() {
     }
     while (!sector[volchok]) {
       volchok++;
-      if (volchok > 12) {
-        volchok %= 13;
+      if (volchok > 13) {
+        volchok %= 14;
       }
     }
 
     std::cout << "Sector " << volchok + 1 << " selected" << std::endl;
 
-    if (question(volchok, sector[volchok])) {
+    if (question(volchok+1, sector[volchok])) {
       player_count++;
     } else {
       viewer_count++;
     }
-    free_sector = false;
+    /* free_sector = false;
     for (size_t i = 0; i < 13; i++) {
       if (sector[i]) {
         free_sector = true;
         break;
-      }
-    }
-    if (!free_sector) {
+      } */
+
+    if (player_count >= 6 || viewer_count >= 6) {
       if (player_count > viewer_count) {
         std::cout << "Player Win!" << std::endl;
+        free_sector = false;
       } else {
         std::cout << "Viewer Win!" << std::endl;
+        free_sector = false;
       }
     }
   }
