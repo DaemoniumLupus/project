@@ -46,7 +46,7 @@ void massive() {
 
   std::vector<int> in_bildings;
   int in_count;
-  
+
   std::ifstream in_file("bildings.txt");
   in_file >> in_count;
   for (size_t i = 0; i < in_count; i++) {
@@ -63,7 +63,7 @@ void massive() {
     sum += in_bildings[i];
   }
   if (sum == control_sum) {
-    std::cout << in_city<< " population: " << sum  << std::endl;
+    std::cout << in_city << " population: " << sum << std::endl;
 
   } else {
     std::cout << "Invalid control sum: " << sum << std::endl;
