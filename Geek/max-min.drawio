@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-21T07:56:08.903Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="xPYN_KOwr1vNRsItqbPh" version="21.3.2" type="github">
+<mxfile host="app.diagrams.net" modified="2023-05-21T07:58:16.807Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="NI-Mozn9Xy81Cpx0L_4e" version="21.3.2" type="github">
   <diagram name="Страница 1" id="dsszgCT4D8X_oCPjsj_D">
     <mxGraphModel dx="1877" dy="549" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -22,7 +22,7 @@
         <mxCell id="w890S_GkcKNvWgeEcLcq-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="w890S_GkcKNvWgeEcLcq-7" target="w890S_GkcKNvWgeEcLcq-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="w890S_GkcKNvWgeEcLcq-7" value="if mas[i] &amp;gt; max&lt;br&gt;" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="w890S_GkcKNvWgeEcLcq-7" value="mas[i] &amp;gt; mas[max]" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="120" y="370" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="w890S_GkcKNvWgeEcLcq-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="w890S_GkcKNvWgeEcLcq-9" target="w890S_GkcKNvWgeEcLcq-34">
@@ -51,7 +51,7 @@
         <mxCell id="w890S_GkcKNvWgeEcLcq-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="w890S_GkcKNvWgeEcLcq-17" target="w890S_GkcKNvWgeEcLcq-22">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="w890S_GkcKNvWgeEcLcq-17" value="if mas[i] &amp;lt; min" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="w890S_GkcKNvWgeEcLcq-17" value="mas[i] &amp;lt; mas[min]" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="270" y="370" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="w890S_GkcKNvWgeEcLcq-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="w890S_GkcKNvWgeEcLcq-19" target="w890S_GkcKNvWgeEcLcq-22">
