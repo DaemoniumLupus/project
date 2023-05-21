@@ -33,7 +33,7 @@ struct building {
   bool pipe = false;
 };
 
-//#define PB plot[count].build[build_count]
+// #define PB plot[count].build[build_count]
 
 int main() {
   int n;
@@ -62,24 +62,47 @@ int main() {
       }
       bool corr = true;
       for (int build_count = 0; build_count < buf_int; build_count++) {
-        std::cout << "Enter name build: ";
+        std::cout << "Enter name "<< build_count + 1 << " build: ";
         std::cin >> buf_str;
         if (buf_str == "Bath") {
           plot[count].build[build_count].name = Build_type::Bath;
-        }else if(buf_str == "Garage"){
+        } else if (buf_str == "Garage") {
           plot[count].build[build_count].name = Build_type::Garage;
-        } else if (buf_str == "Barn"){
+        } else if (buf_str == "Barn") {
           plot[count].build[build_count].name = Build_type::Barn;
         }
-        if (buf_str == "Barn"){
+        if (buf_str == "Barn") {
           std::string buf;
           std::cout << "Barn have pipe?(YES/NO)";
           std::cin >> buf;
-          if (buf == "YES"){
+          if (buf == "YES") {
             plot[count].build[build_count].pipe = true;
           }
         }
+      }
+      int number_of_floors = 1;
+      std::cout << "Enter the number of floors: ";
+      std::cin >> number_of_floors;
+
+      for (int floor_count = 0; floor_count < number_of_floors; floor_count++) {
+        std::cout << "Enter the number of rooms on the " << floor_count << " floor";
+        std::cin >> buf_int;
+        for (int  room_count = 0; room_count < buf_int; room_count++)
+        {
+          plot[count].house_on_plots.floor[floor_count].num = room_count;
+          plot[count].house_on_plots.floor[floor_count];
+          std::cout << "Enter name " << floor_count + 1 << " rooms: ";
+          std::cin >> buf_str;
+          if (buf_str == "Living") {
+            plot[count].house_on_plots.floor[floor_count]
+            } else if (buf_str == "Garage") {
+            plot[count].house_on_plots.floor[floor_count];
+          } else if (buf_str == "Barn") {
+            plot[count].house_on_plots.floor[floor_count];
+          }
+        }
+        
+      }
     }
   }
-}
 }
