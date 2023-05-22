@@ -3,8 +3,7 @@
 #include <string>
 #include <vector>
 
-enum class Room_type { Living,
- Children, Bath, Kitchen, Bedroom };
+enum class Room_type { Living, Children, Bath, Kitchen, Bedroom };
 
 enum class Build_type { Bath, Garage, Barn };
 
@@ -16,12 +15,12 @@ struct room {
 struct floors {
   int num_floor;
   int ceiling_height;
-  std::vector<room> rooms_on_the_floor[4];
+  std::vector<room> rooms_on_the_floor;
 };
 
 struct house {
   int square_house;
-  std::vector<floors> floor[4];
+  std::vector<floors> floor;
 };
 
 struct building {
@@ -36,12 +35,6 @@ struct plots {
   house house_on_plots;
   std::vector<building> build;
 };
-
-
-
-
-
-
 
 // #define PB plot[count].build[build_count]
 
@@ -93,30 +86,35 @@ int main() {
       int number_of_floors = 1;
       std::cout << "Enter the number of floors: ";
       std::cin >> number_of_floors;
+      plot[count].house_on_plots.floor.resize(number_of_floors);
 
       for (int floor_count = 0; floor_count < number_of_floors; floor_count++) {
-        std::cout << "Enter the height of the ceiling on the " << floor_count+ 1
-                  << " floor: ";
+        std::cout << "Enter the height of the ceiling on the "
+                  << floor_count + 1 << " floor: ";
         std::cin >> buf_int;
         plot[count].house_on_plots.floor[floor_count].ceiling_height = buf_int;
 
         int number_of_room;
-        
+
         std::cout << "Enter the number of rooms on the " << floor_count + 1
                   << " floor";
-        std::cin >>number_of_room;
-        for (int room_count = 0; room_count < number_of_room; room_count++) {
-          plot[count].house_on_plots.floor[floor_count].num_floor = room_count + 1;
+        std::cin >> number_of_room;
+       /*  for (int room_count = 0; room_count < number_of_room; room_count++) {
+          plot[count].house_on_plots.floor[floor_count].num_floor =
+              room_count + 1;
           std::cout << "Enter name " << floor_count + 1 << " rooms: ";
           std::cin >> buf_str;
           if (buf_str == "Living") {
-            plot[count].house_on_plots.floor[floor_count]
+            plot[count]
+                .house_on_plots.floor[floor_count]
+                .rooms_on_the_floor[room_count]
+                .name_room = Room_type::Living;
           } else if (buf_str == "Garage") {
             plot[count].house_on_plots.floor[floor_count];
           } else if (buf_str == "Barn") {
             plot[count].house_on_plots.floor[floor_count];
           }
-        }
+        } */
       }
     }
   }
