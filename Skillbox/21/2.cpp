@@ -3,9 +3,32 @@
 #include <string>
 #include <vector>
 
-enum class Room_type { Living, Children, Bath, Kitchen, Bedroom };
+enum class Room_type { Living,
+ Children, Bath, Kitchen, Bedroom };
 
 enum class Build_type { Bath, Garage, Barn };
+
+struct room {
+  Room_type name_room;
+  int square_room;
+};
+
+struct floors {
+  int num_floor;
+  int ceiling_height;
+  std::vector<room> rooms_on_the_floor[4];
+};
+
+struct house {
+  int square_house;
+  std::vector<floors> floor[4];
+};
+
+struct building {
+  Build_type name;
+  int square_bild;
+  bool pipe = false;
+};
 
 struct plots {
   int num;
@@ -13,25 +36,12 @@ struct plots {
   house house_on_plots;
   std::vector<building> build;
 };
-struct house {
-  int square_house;
-  std::vector<floors> floor[4];
-};
-struct floors {
-  int num;
-  int ceiling_height;
-  std::vector<room> rooms_on_the_floor[4];
-};
 
-struct room {
-  Room_type name;
-  int square;
-};
-struct building {
-  Build_type name;
-  int square_bild;
-  bool pipe = false;
-};
+
+
+
+
+
 
 // #define PB plot[count].build[build_count]
 
@@ -62,7 +72,7 @@ int main() {
       }
       bool corr = true;
       for (int build_count = 0; build_count < buf_int; build_count++) {
-        std::cout << "Enter name "<< build_count + 1 << " build: ";
+        std::cout << "Enter name " << build_count + 1 << " build: ";
         std::cin >> buf_str;
         if (buf_str == "Bath") {
           plot[count].build[build_count].name = Build_type::Bath;
@@ -85,23 +95,28 @@ int main() {
       std::cin >> number_of_floors;
 
       for (int floor_count = 0; floor_count < number_of_floors; floor_count++) {
-        std::cout << "Enter the number of rooms on the " << floor_count << " floor";
+        std::cout << "Enter the height of the ceiling on the " << floor_count+ 1
+                  << " floor: ";
         std::cin >> buf_int;
-        for (int  room_count = 0; room_count < buf_int; room_count++)
-        {
-          plot[count].house_on_plots.floor[floor_count].num = room_count;
-          plot[count].house_on_plots.floor[floor_count];
+        plot[count].house_on_plots.floor[floor_count].ceiling_height = buf_int;
+
+        int number_of_room;
+        
+        std::cout << "Enter the number of rooms on the " << floor_count + 1
+                  << " floor";
+        std::cin >>number_of_room;
+        for (int room_count = 0; room_count < number_of_room; room_count++) {
+          plot[count].house_on_plots.floor[floor_count].num_floor = room_count + 1;
           std::cout << "Enter name " << floor_count + 1 << " rooms: ";
           std::cin >> buf_str;
           if (buf_str == "Living") {
             plot[count].house_on_plots.floor[floor_count]
-            } else if (buf_str == "Garage") {
+          } else if (buf_str == "Garage") {
             plot[count].house_on_plots.floor[floor_count];
           } else if (buf_str == "Barn") {
             plot[count].house_on_plots.floor[floor_count];
           }
         }
-        
       }
     }
   }
