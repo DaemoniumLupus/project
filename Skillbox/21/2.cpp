@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-enum class Room_type { Living, Children, Bath, Kitchen, Bedroom };
+enum class Room_type { Living, Children, Bathroom, Kitchen, Bedroom };
 
 enum class Build_type { Bath, Garage, Barn };
 
@@ -60,17 +60,18 @@ int main() {
     int number_of_builds;
     while (true) { // количество строений помимо дома
       std::cout << "Enter quantity: ";
-      std::cin >> buf_int;
-      if (buf_int <= 0 || buf_int > 3) {
+      std::cin >> number_of_builds;
+      if (number_of_builds <= 0 || number_of_builds > 3) {
         std::cerr << "Incorrect number!" << std::endl;
       }else{
         break;
       }
     }
-    for (int build_count = 0; build_count < buf_int;
+    plot[count].build.resize(number_of_builds);
+    for (int build_count = 0; build_count < number_of_builds;
          build_count++) { // строения
       std::cout << "Enter name " << build_count + 1
-                << " build: "; // если есть баня есть ли у нее труба
+                << " build: "; 
       std::cin >> buf_str;
       if (buf_str == "Bath") {
         plot[count].build[build_count].name = Build_type::Bath;
@@ -83,9 +84,9 @@ int main() {
       std::cout << "Enter square build: ";
       std::cin >> buf_int;
 
-      if (buf_str == "Barn") {
+      if (buf_str == "Bath") { // если есть баня есть ли у нее труба
         std::string buf;
-        std::cout << "Barn have pipe?(YES/NO)";
+        std::cout << "Bath have pipe?(YES/NO)";
         std::cin >> buf;
         if (buf == "YES") {
           plot[count].build[build_count].pipe = true; // труба
@@ -109,20 +110,21 @@ int main() {
       plot[count].house_on_plots.floor[floor_count].num_floor = floor_count + 1;
       std::cout << "Enter the height of the ceiling on the " << floor_count + 1
                 << " floor: ";
-      std::cin >> buf_int;
+      float ceiling;
+      std::cin >>  ceiling;
       plot[count].house_on_plots.floor[floor_count].ceiling_height =
-          buf_int; // высота потолков
+          ceiling; // высота потолков
 
       int number_of_room;
 
       std::cout << "Enter the number of rooms on the " << floor_count + 1
-                << " floor";
+                << " floor: ";
       std::cin >> number_of_room; // количество комнат
       plot[count].house_on_plots.floor[floor_count].rooms_on_the_floor.resize(
           number_of_room);
       for (int room_count = 0; room_count < number_of_room;
            room_count++) { // комнаты
-        std::cout << "Enter name " << floor_count + 1 << " rooms: ";
+        std::cout << "Enter name " << room_count + 1 << " rooms: ";
         std::cin >> buf_str;
         if (buf_str == "Living") {
           plot[count]
@@ -134,11 +136,11 @@ int main() {
               .house_on_plots.floor[floor_count]
               .rooms_on_the_floor[room_count]
               .name_room = Room_type::Children;
-        } else if (buf_str == "Bath") {
+        } else if (buf_str == "Bathroom") {
           plot[count]
               .house_on_plots.floor[floor_count]
               .rooms_on_the_floor[room_count]
-              .name_room = Room_type::Bath;
+              .name_room = Room_type::Bathroom;
         } else if (buf_str == "Kitchen") {
           plot[count]
               .house_on_plots.floor[floor_count]
@@ -160,4 +162,19 @@ int main() {
       }
     }
   }
+
+  int sum_S= 0;
+  int sum_S_build = 0;
+  for (int i = 0; i < plot.size();i++){
+    sum_S += plot[i].square_plots;
+    sum_S_build += plot[i].house_on_plots.square_house;
+    for (int j = 0; j < plot[i].build.size(); j++)
+    {
+      sum_S_build += plot[i].build[j].square_bild;
+    }
+  }
+  
+  float attitude;
+  attitude = sum_S_build / sum_S;
+  std::cout << attitude << std::endl;
 }
