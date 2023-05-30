@@ -13,3 +13,4 @@
 * git diff - разница между commit
 * git add - сохранение в сиситеме git
 * git branch - выводит список веток
+* git merge - слияние веток
