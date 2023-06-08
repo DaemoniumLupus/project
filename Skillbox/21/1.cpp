@@ -104,19 +104,19 @@ void List(std::vector<note> &statement) {
       file.read((char *)&len, 1);
       statement[count].name.resize(len);
       file.read((char *)statement[count].name.c_str(), len);
-      if (statement[count].name.empty()){
+      if (statement[count].name.empty()) {
         statement.resize(statement.size() - 1);
         break;
       }
       file.read((char *)&buf, 1);
       file >> statement[count].date;
-      //file.read((char *) statement[count].date.c_str(), 10);
-      // не читает дату
+      // file.read((char *) statement[count].date.c_str(), 10);
+      //  не читает дату
       file.read((char *)&buf, 1);
-      //std::cout << sizeof(statement[count].sum) << std::endl << file.tellg();
-      
+      // std::cout << sizeof(statement[count].sum) << std::endl << file.tellg();
+
       file.read((char *)&statement[count].sum, sizeof(statement[count].sum));
-      //std::cout << std::endl << file.tellg() << std::endl;
+      // std::cout << std::endl << file.tellg() << std::endl;
       file.read((char *)&buf, 1);
       file.read((char *)&buf, 1);
       len = 0;
