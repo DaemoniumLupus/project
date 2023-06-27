@@ -1,8 +1,9 @@
 #include <ctime>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <string>
-#include <fstream>
+
 
 bool TaskWork = false;
 int count = 1;
@@ -13,29 +14,33 @@ void Finish() {
   std::time_t fin = std::time(nullptr);
   std::time_t res = std::difftime(fin, start);
 
-  std::ofstream file("status.txt",std::ios::app);
-  file << count << ' ' << name <<' ' << res<< std::endl;
+  std::ofstream file("status.txt", std::ios::app);
+  file << count << ' ' << name << ' ' << res << std::endl;
   file.close();
   count++;
-    }
+}
 
 void Start() {
-  
-  if (TaskWork){
+
+  if (TaskWork) {
     Finish();
   }
   start = std::time(nullptr);
   std::cout << "Enter name task: ";
   std::cin >> name;
   TaskWork = true;
+}
+
+void Status() {
+  std::time_t fileTime;
+  int fileCount;
+  std::string fileName;
+
+  std::ifstream("status.txt");
   
+}
 
-  }
-
-  
-  void Status() {}
-
-  int main() {
+int main() {
   std::string command;
 
   std::ofstream file("status.txt");
