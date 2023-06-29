@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-
 bool TaskWork = false;
 int count = 1;
 std::string name;
@@ -12,10 +11,11 @@ std::time_t start;
 
 void Finish() {
   std::time_t fin = std::time(nullptr);
+  
   std::time_t res = std::difftime(fin, start);
 
   std::ofstream file("status.txt", std::ios::app);
-  file << count << ' ' << name << ' ' << res << std::endl;
+  file << res << std::endl;
   file.close();
   count++;
 }
@@ -29,16 +29,35 @@ void Start() {
   std::cout << "Enter name task: ";
   std::cin >> name;
   TaskWork = true;
+
+  std::ofstream file("status.txt", std::ios::app);
+  file << count << ' ' << name << ' ';
+  file.close();
 }
 
-void Status() {
+ void Status() {
   std::time_t fileTime;
   int fileCount;
   std::string fileName;
+  char strFileTime[256];
 
-  std::ifstream("status.txt");
-  
-}
+  std::ifstream file("status.txt");
+
+    file >> fileCount >> fileName >> fileTime;
+    //std::tm* tm = std::gmtime(&fileTime);
+    /* int hourTime = fileTime / 3600;
+    int minTime = fileTime / 60;
+    int secTime = fileTime % 60; */
+    
+   // std::strftime(strFileTime,sizeof(strFileTime),"%H:%M:%S",tm);
+
+    do {
+    std::cout << fileCount << ' ' << fileName 
+              << ' ' << std::put_time(std::gmtime(&fileTime),"%H:%M:%S") << std::endl;
+    
+    file >> fileCount >> fileName >> fileTime;
+  } while (!file.eof());
+} 
 
 int main() {
   std::string command;
