@@ -9,25 +9,29 @@ int count = 1;
 std::string name;
 std::time_t start;
 
+
+
 void Finish() {
   std::time_t fin = std::time(nullptr);
-  
+
   std::time_t res = std::difftime(fin, start);
 
   std::ofstream file("status.txt", std::ios::app);
   file << res << std::endl;
   file.close();
+  TaskWork = false;
   count++;
 }
 
 void Start() {
+  std::cin.ignore();
 
   if (TaskWork) {
     Finish();
   }
   start = std::time(nullptr);
   std::cout << "Enter name task: ";
-  std::cin >> name;
+  std::getline(std::cin,name);
   TaskWork = true;
 
   std::ofstream file("status.txt", std::ios::app);
@@ -35,7 +39,7 @@ void Start() {
   file.close();
 }
 
- void Status() {
+void Status() {
   std::time_t fileTime;
   int fileCount;
   std::string fileName;
@@ -43,21 +47,24 @@ void Start() {
 
   std::ifstream file("status.txt");
 
-    file >> fileCount >> fileName >> fileTime;
-    //std::tm* tm = std::gmtime(&fileTime);
-    /* int hourTime = fileTime / 3600;
-    int minTime = fileTime / 60;
-    int secTime = fileTime % 60; */
-    
-   // std::strftime(strFileTime,sizeof(strFileTime),"%H:%M:%S",tm);
+  file >> fileCount >> fileName >> fileTime;
+  int bufCountFile = fileCount;
+  do {
+    int bufCountFile = fileCount;
+    std::cout << fileCount << ' ' << fileName << ' ';
+    std::cout << std::put_time(std::gmtime(&fileTime), "%H:%M:%S")
+              << std::endl;
+   
 
-    do {
-    std::cout << fileCount << ' ' << fileName 
-              << ' ' << std::put_time(std::gmtime(&fileTime),"%H:%M:%S") << std::endl;
-    
     file >> fileCount >> fileName >> fileTime;
+    
+
   } while (!file.eof());
-} 
+
+  if (TaskWork) {
+    std::cout << fileCount << ' ' << fileName << std::endl;
+  }
+}
 
 int main() {
   std::string command;
