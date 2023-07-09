@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.17)
+
+set(MY_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
+
+add_executable(MySkillboxApp main.cpp operation.cpp MY_INCLUDE_DIR/enter.h MY_INCLUDE_DIR/operation.h MY_INCLUDE_DIR/include/struct.h)
+target_include_directories(MySkillboxApp PUBLIC ${MY_INCLUDE_DIR})
+
+

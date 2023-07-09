@@ -57,5 +57,6 @@
     "cstring": "cpp",
     "iomanip": "cpp"
     },
-    "clang-format.executable": "C:\\Users\\User\\scoop\\apps\\llvm\\16.0.5\\bin\\clang-format.exe"
+    "clang-format.executable": "C:\\Users\\User\\scoop\\apps\\llvm\\16.0.5\\bin\\clang-format.exe",
+    "cmake.cmakePath": "/path/to/cmake"
 }
