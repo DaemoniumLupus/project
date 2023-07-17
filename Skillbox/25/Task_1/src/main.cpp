@@ -1,8 +1,6 @@
 #include "enter.h"
 #include "operation.h"
 
-
-
 int main() {
   std::string command;
   coord scalpelXY_1, scalpelXY_2;
@@ -18,7 +16,7 @@ int main() {
       Hemostat(EnterCoord());
     } else if (command == "tweezers") {
       Tweezers(EnterCoord());
-    }else if(command == "suture"){
+    } else if (command == "suture") {
       sutureXY_1 = EnterCoord();
       sutureXY_2 = EnterCoord(2);
       if (sutureXY_1.x == scalpelXY_1.x && sutureXY_2.x == scalpelXY_2.x &&
@@ -26,8 +24,8 @@ int main() {
         Suture(sutureXY_1, sutureXY_2);
         std::cout << "Operation completed" << std::endl;
         break;
-      }else {
-        std::cout << "Uncut area sewn up!";
+      } else {
+        std::cout << "Uncut area sewn up!" << std::endl;
       }
     }
   }

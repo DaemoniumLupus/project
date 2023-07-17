@@ -1,7 +1,7 @@
 #pragma once
 #include "struct.h"
 
-coord EnterCoord( int i = 1) {
+inline coord EnterCoord(int i = 1) {
 
   coord XY;
 
