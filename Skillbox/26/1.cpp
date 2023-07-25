@@ -1,8 +1,10 @@
 #include <ctime>
+#include <iomanip>
 #include <iostream>
 #include <stdlib.h>
 #include <string>
 #include <vector>
+
 
 class Track {
   std::string name;
@@ -11,6 +13,18 @@ class Track {
 
 public:
   std::string getName() { return name; }
+
+  Track addTrack() {
+    Track buffer;
+    std::cout << "Enter name track: ";
+    std::cin >> buffer.name;
+    std::cout << "Enter creat date(YYYY/MM/DD): ";
+    std::cin >> std::get_time(buffer.time, "%Y/%m/%d");
+    std::cout << "Enter duration track: ";
+    std::cin >> buffer.duration;
+
+    return buffer;
+  }
   void getInfo() {
     std::cout << name << std::endl;
     std::cout << time->tm_year << "/" << time->tm_mon << "/" << time->tm_mday
@@ -29,7 +43,12 @@ class Player {
     playerStatus = "play";
     playList[num].getInfo();
   }
+
 public:
+  void addTrackInPlaylist() {
+    playList.resize(playList.size() + 1);
+    playList[playList.size()-1] = playList[playList.size()-1].addTrack();
+  }
   void setPlay() {
     int num;
     if (playerStatus != "play") {
@@ -66,18 +85,18 @@ public:
       playerStatus = "stop";
     }
   }
-
-}
+};
 
 int main() {
-  Player player;
+  Player player ;
+
   std::string command;
   std::cout << "Enter command: ";
   std::cin >> command;
   while (command != "exit") {
     if (command == "play") {
-      
-}
+player.addTrackInPlaylist();
+    }
     std::cout << "Enter command: ";
     std::cin >> command;
   }
