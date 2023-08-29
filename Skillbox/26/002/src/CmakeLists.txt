@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.23)
+
+set(MY_INCLUDE ${CMAKE_SOURCE_DIR}/include)
+
+add_executable(002 main.cpp)
+
+target_include_directories(002 PUBLIC ${MY_INCLUDE})
